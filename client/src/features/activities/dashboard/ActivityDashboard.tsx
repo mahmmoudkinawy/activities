@@ -9,13 +9,11 @@ import ActivityForm from '../../activities/form/ActivityForm';
 
 interface Props {
     activities: Activity[];
-    createOrEdit: (activity: Activity) => void;
     deleteActivity: (id: string) => void;
     submitting: boolean;
 }
 
 export default observer(function ActivityDashboard({activities, 
-        createOrEdit,
         deleteActivity,
         submitting }: Props) {
     
@@ -31,7 +29,7 @@ export default observer(function ActivityDashboard({activities,
                 {selectedActivity && !editMode && 
                 <ActivityDetails />}
                 {editMode &&
-                <ActivityForm submitting={submitting}  createOrEdit={createOrEdit} />}
+                <ActivityForm />}
             </Grid.Column>
         </Grid>
     )
