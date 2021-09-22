@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Activity } from '../models/activity';
-import  NavBar  from './NavBar';
+import  NavBar from './NavBar';
 import  ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
+import LoadingComponent from '../../App/layout/LoadingComponent';
 import { v4 as uuid } from 'uuid';
 import agent from '../api/agent';
  
@@ -10,6 +11,7 @@ function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     agent.Activities.list().then(response => {
@@ -19,6 +21,7 @@ function App() {
         activities.push(activity);
       })
       setActivities(activities);
+      setLoading(false);
     })
   }, [])
 
@@ -50,6 +53,9 @@ function App() {
   function handleDeleteActivity(id: string) {
     setActivities([...activities.filter(x => x.id !== id)])
   }
+
+  if(loading) 
+    return <LoadingComponent content='Loading App' />
 
   return (
     <>
