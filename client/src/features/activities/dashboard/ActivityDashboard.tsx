@@ -4,13 +4,10 @@ import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../../App/layout/LoadingComponent";
 import { useStore } from "../../../App/stores/store";
 import ActivityList from '../../activities/dashboard/ActivityList';
-import ActivityDetails from '../../activities/details/ActivityDetails';
-import ActivityForm from '../../activities/form/ActivityForm';
 
 export default observer(function ActivityDashboard() {
     
             const {activityStore} = useStore();
-            const {selectedActivity, editMode} = activityStore;
 
             useEffect(() => {
               activityStore.loadActivities();
@@ -24,10 +21,7 @@ export default observer(function ActivityDashboard() {
                 <ActivityList  />
             </Grid.Column>
             <Grid.Column width='6'>
-                {selectedActivity && !editMode && 
-                <ActivityDetails />}
-                {editMode &&
-                <ActivityForm />}
+                <h2>Activity filters</h2>
             </Grid.Column>
         </Grid>
     )
