@@ -39,6 +39,6 @@ body {
   font-weight: normal;
 }
 
-.ui.basic.red.label {
-  margin-bottom: 3px;
+.react-datepicker-wrapper {
+  width: 100%;
 }

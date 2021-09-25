@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import MyTextInput from "../../../App/common/form/MyTextInput";
 import MyTextArea from "../../../App/common/form/MyTextArea";
 import MySelectInput from "../../../App/common/form/MySelectInput";
+import MyDateInput from "../../../App/common/form/MyDateInput";
 import { categoryOptions } from "../../../App/common/options/categoryOptions";
 
 export default observer(function ActivityForm() {
@@ -83,7 +84,13 @@ export default observer(function ActivityForm() {
               placeholder="Category"
               name="category"
             />
-            <MyTextInput placeholder="Date" name="date" />
+            <MyDateInput
+              placeholderText="Date"
+              name="date"
+              showTimeSelect
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm aa"
+            />
             <MyTextInput placeholder="City" name="city" />
             <MyTextInput placeholder="Venue" name="venue" />
 
