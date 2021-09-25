@@ -39,4 +39,6 @@ body {
   font-weight: normal;
 }
 
-/*end home page styles*/
+.ui.basic.red.label {
+  margin-bottom: 3px;
+}
