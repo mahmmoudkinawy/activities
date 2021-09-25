@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../App/common/form/MyTextInput";
+import MyTextArea from "../../../App/common/form/MyTextArea";
 
 export default observer(function ActivityForm() {
   const history = useHistory();
@@ -75,7 +76,7 @@ export default observer(function ActivityForm() {
         {({ handleSubmit }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
             <MyTextInput name="title" placeholder="Title" />
-            <MyTextInput placeholder="Description" name="description" />
+            <MyTextArea rows={3} placeholder="Description" name="description" />
             <MyTextInput placeholder="Category" name="category" />
             <MyTextInput placeholder="Date" name="date" />
             <MyTextInput placeholder="City" name="city" />
