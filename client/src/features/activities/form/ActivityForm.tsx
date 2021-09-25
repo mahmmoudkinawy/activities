@@ -12,6 +12,7 @@ import MyTextArea from "../../../App/common/form/MyTextArea";
 import MySelectInput from "../../../App/common/form/MySelectInput";
 import MyDateInput from "../../../App/common/form/MyDateInput";
 import { categoryOptions } from "../../../App/common/options/categoryOptions";
+import { Activity } from "../../../App/models/activity";
 
 export default observer(function ActivityForm() {
   const history = useHistory();
@@ -25,12 +26,12 @@ export default observer(function ActivityForm() {
   } = activityStore;
   const { id } = useParams<{ id: string }>();
 
-  const [activity, setActivity] = useState({
+  const [activity, setActivity] = useState<Activity>({
     id: "",
     title: "",
     category: "",
     description: "",
-    date: "",
+    date: null,
     city: "",
     venue: "",
   });
