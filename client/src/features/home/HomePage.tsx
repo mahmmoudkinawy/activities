@@ -3,9 +3,10 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Header, Image, Segment } from "semantic-ui-react";
 import { useStore } from "../../App/stores/store";
+import LoginForm from "../users/LoginForm";
 
 export default observer(function HomePage() {
-  const { userStore } = useStore();
+  const { userStore, modalStore } = useStore();
   return (
     <Segment inverted textAlign="center" vertical className="masthead">
       <Container text>
@@ -26,9 +27,22 @@ export default observer(function HomePage() {
             </Button>
           </Fragment>
         ) : (
-          <Button as={Link} to="/login" size="huge" inverted>
-            Login!
-          </Button>
+          <Fragment>
+            <Button
+              onClick={() => modalStore.openModal(<LoginForm />)}
+              size="huge"
+              inverted
+            >
+              Login!
+            </Button>
+            <Button
+              onClick={() => modalStore.openModal(<h1>Register</h1>)}
+              size="huge"
+              inverted
+            >
+              Register!
+            </Button>
+          </Fragment>
         )}
       </Container>
     </Segment>

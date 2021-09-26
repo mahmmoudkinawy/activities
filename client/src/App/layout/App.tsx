@@ -9,6 +9,7 @@ import ActivityForm from "../../features/activities/form/ActivityForm";
 import ActivityDetails from "../../features/activities/details/ActivityDetails";
 import TestErrors from "../../features/errors/TestError";
 import { ToastContainer } from "react-toastify";
+import ModelContainer from "../../App/common/modals/ModalContainer";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../App/stores/ServerError";
 import LoginForm from "../../features/users/LoginForm";
@@ -33,6 +34,7 @@ function App() {
   return (
     <Fragment>
       <ToastContainer position="bottom-right" />
+      <ModelContainer />
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
