@@ -6,17 +6,25 @@ import MyTextInput from "../../App/common/form/MyTextInput";
 import { useStore } from "../../App/stores/store";
 import * as Yup from "yup";
 
-export default observer(function LoginForm() {
+export default observer(function RegisterForm() {
   const { userStore } = useStore();
   return (
     <Formik
-      initialValues={{ email: "", password: "", error: null }}
+      initialValues={{
+        displayName: "",
+        username: "",
+        email: "",
+        password: "",
+        error: null,
+      }}
       onSubmit={(values, { setErrors }) =>
         userStore
-          .login(values)
+          .register(values)
           .catch((error) => setErrors({ error: "Invalid email or password" }))
       }
       validationSchema={Yup.object({
+        displayName: Yup.string().required(),
+        username: Yup.string().required(),
         email: Yup.string().required().email(),
         password: Yup.string().required(),
       })}
@@ -25,10 +33,12 @@ export default observer(function LoginForm() {
         <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
           <Header
             as="h2"
-            content="Login to Reactivities"
+            content="Sign up to Reactivities"
             color="teal"
             textAlign="center"
           />
+          <MyTextInput name="displayName" placeholder="Display Name" />
+          <MyTextInput name="username" placeholder="Username" />
           <MyTextInput name="email" placeholder="Email" />
           <MyTextInput name="password" placeholder="Password" type="password" />
           <ErrorMessage
@@ -46,7 +56,7 @@ export default observer(function LoginForm() {
             disabled={!isValid || !dirty || isSubmitting}
             loading={isSubmitting}
             positive
-            content="Login"
+            content="Register"
             type="submit"
             fluid
           />
