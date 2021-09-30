@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import ModelContainer from "../../App/common/modals/ModalContainer";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../App/stores/ServerError";
+import ProfilePage from "../../../src/features/profiles/ProfilePage";
 import LoginForm from "../../features/users/LoginForm";
 import { useStore } from "../stores/store";
 import LoadingComponent from "./LoadingComponent";
@@ -51,6 +52,7 @@ function App() {
                   component={ActivityForm}
                 />
                 <Route path="/errors" component={TestErrors} />
+                <Route path="/profiles/:username" component={ProfilePage} />
                 <Route path="/server-error" component={ServerError} />
                 <Route path="/login" component={LoginForm} />
                 <Route component={NotFound} />
