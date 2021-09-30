@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import ProfileHeader from "./ProfileHeader";
 import ProfileContent from "./ProfileContent";
@@ -21,8 +21,12 @@ export default observer(function ProfilePage() {
   return (
     <Grid>
       <Grid.Column width={16}>
-        {profile && <ProfileHeader profile={profile} />}
-        <ProfileContent />
+        {profile && (
+          <Fragment>
+            <ProfileHeader profile={profile} />
+            <ProfileContent profile={profile} />
+          </Fragment>
+        )}
       </Grid.Column>
     </Grid>
   );
