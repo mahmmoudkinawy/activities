@@ -15,11 +15,13 @@ export default observer(function ActivityDetails() {
     selectedActivity: activity,
     loadActivity,
     loadingInitial,
+    clearSelectedActivity,
   } = activityStore;
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     if (id) loadActivity(id);
+    return () => clearSelectedActivity();
   }, [id, loadActivity]);
 
   if (loadingInitial || !activity) return <LoadingComponent />;
