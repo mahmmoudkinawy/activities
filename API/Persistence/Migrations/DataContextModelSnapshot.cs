@@ -191,15 +191,15 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.UserFollowing", b =>
                 {
-                    b.Property<string>("TargetId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ObserverId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("TargetId", "ObserverId");
+                    b.Property<string>("TargetId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("ObserverId");
+                    b.HasKey("ObserverId", "TargetId");
+
+                    b.HasIndex("TargetId");
 
                     b.ToTable("UserFollowings");
                 });
@@ -382,13 +382,13 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.AppUser", "Observer")
                         .WithMany("Followings")
                         .HasForeignKey("ObserverId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Domain.AppUser", "Target")
                         .WithMany("Followers")
                         .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Observer");
