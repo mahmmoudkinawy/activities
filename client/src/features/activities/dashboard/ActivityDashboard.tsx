@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
-import { Button, Grid, Loader } from "semantic-ui-react";
-import LoadingComponent from "../../../App/layout/LoadingComponent";
+import { Grid, Loader } from "semantic-ui-react";
 import { useStore } from "../../../App/stores/store";
 import ActivityList from "../../activities/dashboard/ActivityList";
 import ActivityFilters from "../../activities/dashboard/ActivityFilters";
 import { PagingParams } from "../../../App/models/pagination";
 import InfiniteScroll from "react-infinite-scroller";
+import ActivityListItemPlaceholder from "../../activities/dashboard/ActivityListItemPlaceholder";
 
 export default observer(function ActivityDashboard() {
   const { activityStore } = useStore();
@@ -24,23 +24,28 @@ export default observer(function ActivityDashboard() {
     if (activityRegistry.size <= 1) loadActivities();
   }, [activityRegistry.size, loadActivities]);
 
-  if (activityStore.loadingInitial && !loadingNext)
-    return <LoadingComponent content="Loading activities..." />;
   return (
     <Grid>
       <Grid.Column width="10">
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={handleGetNext}
-          hasMore={
-            !loadingNext &&
-            !!pagination &&
-            pagination.currentPage < pagination.totalPages
-          }
-          initialLoad={false}
-        >
-          <ActivityList />
-        </InfiniteScroll>
+        {activityStore.loadingInitial && !loadingNext ? (
+          <>
+            <ActivityListItemPlaceholder />
+            <ActivityListItemPlaceholder />
+          </>
+        ) : (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={handleGetNext}
+            hasMore={
+              !loadingNext &&
+              !!pagination &&
+              pagination.currentPage < pagination.totalPages
+            }
+            initialLoad={false}
+          >
+            <ActivityList />
+          </InfiniteScroll>
+        )}
       </Grid.Column>
       <Grid.Column width="6">
         <ActivityFilters />
