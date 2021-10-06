@@ -9,12 +9,14 @@ import reportWebVitals from "./reportWebVitals";
 import { store, StoreContext } from "./App/stores/store";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import ScrollToTop from "./App/layout/ScrollToTop";
 
 export const history = createBrowserHistory();
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>
     <Router history={history}>
+      <ScrollToTop />
       <App />
     </Router>
   </StoreContext.Provider>,
