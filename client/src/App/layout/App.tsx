@@ -16,6 +16,7 @@ import ProfilePage from "../../../src/features/profiles/ProfilePage";
 import LoginForm from "../../features/users/LoginForm";
 import { useStore } from "../stores/store";
 import LoadingComponent from "./LoadingComponent";
+import PrivateRoute from "../layout/PrivateRoute";
 
 function App() {
   const location = useLocation();
@@ -44,18 +45,28 @@ function App() {
             <NavBar />
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                <Route exact path="/activities" component={ActivityDashboard} />
-                <Route path="/activities/:id" component={ActivityDetails} />
-                <Route
+                <PrivateRoute
+                  exact
+                  path="/activities"
+                  component={ActivityDashboard}
+                />
+                <PrivateRoute
+                  path="/activities/:id"
+                  component={ActivityDetails}
+                />
+                <PrivateRoute
                   key={location.key}
                   path={["/create-activity", "/manage/:id"]}
                   component={ActivityForm}
                 />
                 <Route path="/errors" component={TestErrors} />
-                <Route path="/profiles/:username" component={ProfilePage} />
-                <Route path="/server-error" component={ServerError} />
-                <Route path="/login" component={LoginForm} />
-                <Route component={NotFound} />
+                <PrivateRoute
+                  path="/profiles/:username"
+                  component={ProfilePage}
+                />
+                <PrivateRoute path="/server-error" component={ServerError} />
+                {/* <Route path="/login" component={LoginForm} /> */}
+                <PrivateRoute component={NotFound} />
               </Switch>
             </Container>
           </Fragment>
